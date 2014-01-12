@@ -14,13 +14,13 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "pivotal-to-trello"
-  gem.homepage = "http://github.com/recurser/pivotal-to-trello"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "hello@daveperrett.com"
-  gem.authors = ["Dave Perrett"]
+  gem.name        = "pivotal-to-trello"
+  gem.license     = "MIT"
+  gem.homepage    = "http://github.com/recurser/pivotal-to-trello"
+  gem.summary     = %Q{Pivotal Tracker to Trello exporter}
+  gem.description = %Q{Pulls pivotal tracker stories and imports them into Trello}
+  gem.email       = "hello@daveperrett.com"
+  gem.authors     = ["Dave Perrett"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

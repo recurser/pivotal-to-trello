@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+file = __FILE__
+if File.lstat(file).symlink?
+  require 'pathname'
+  file = Pathname.new(file).realpath
+end
+
+require File.expand_path(File.dirname(file) + '/../lib/pivotal-to-trello')
+PivotalToTrello::Runner.execute

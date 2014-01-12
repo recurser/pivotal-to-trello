@@ -2,8 +2,14 @@
 
 Description goes here.
 
+= Obtaining API credentials
+
+https://trello.com/docs/gettingstarted/index.html#getting-an-application-key
+
+The pivotal tokeb can be found at the bottom of your [Pivotal profile page](https://www.pivotaltracker.com/profile).
+
 == Contributing to pivotal-to-trello
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.
