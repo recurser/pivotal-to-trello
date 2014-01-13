@@ -17,6 +17,8 @@ module PivotalToTrello
 
       puts "\nBeginning import..."
       pivotal.stories(options.pivotal_project_id).each do |story|
+        list_id = label = nil
+
         if story.current_state == 'accepted'
           list_id = options.accepted_list_id
         elsif story.current_state == 'rejected'
@@ -43,9 +45,9 @@ module PivotalToTrello
 
         if story.story_type == 'bug' && options.bug_label
           label = options.bug_label
-        elsif story.story_type == 'chore' && options.feature_label
+        elsif story.story_type == 'feature' && options.feature_label
           label = options.feature_label
-        elsif story.story_type == 'feature' && options.chore_label
+        elsif story.story_type == 'chore' && options.chore_label
           label = options.chore_label
         elsif story.story_type == 'release' && options.release_label
           label = options.release_label
