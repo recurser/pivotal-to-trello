@@ -1,14 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'highline'
-gem 'ruby-trello', '>= 1.0.0 '
-gem 'pivotal-tracker'
+gem 'highline',        '>= 1.6.20'
+gem 'ruby-trello',     '>= 1.1.0'
+gem 'pivotal-tracker', '>= 0.5.12'
 
-# Add dependencies to develop your gem here.
-# Include everything needed to run rake, tests, features, etc.
 group :development do
-  gem 'rspec'
-  gem 'rdoc'
-  gem 'bundler'
-  gem 'jeweler'
+  gem 'rspec',   '>= 2.14.1'
+  gem 'rdoc',    '>= 4.1.1'
+  gem 'jeweler', '>= 2.0.0'
 end
