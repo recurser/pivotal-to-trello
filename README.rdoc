@@ -6,7 +6,9 @@ Description goes here.
 
 https://trello.com/docs/gettingstarted/index.html#getting-an-application-key
 
-The pivotal tokeb can be found at the bottom of your [Pivotal profile page](https://www.pivotaltracker.com/profile).
+https://trello.com/1/authorize?key=API_KEY&name=Trello%20Import&response_type=token&scope=read,write
+
+The pivotal token can be found at the bottom of your [Pivotal profile page](https://www.pivotaltracker.com/profile).
 
 == Contributing to pivotal-to-trello
 

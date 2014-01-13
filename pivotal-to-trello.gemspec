@@ -12,26 +12,30 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.authors = ["Dave Perrett"]
   s.date = "2014-01-13"
-  s.description = "Pulls pivotal tracker stories and imports them into Trello"
+  s.description = "Pulls stories from Pivotal Tracker and imports them into Trello"
   s.email = "hello@daveperrett.com"
   s.executables = ["pivotal-to-trello"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.markdown"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.markdown",
     "Rakefile",
     "VERSION",
     "bin/pivotal-to-trello",
     "lib/pivotal-to-trello.rb",
     "lib/pivotal_to_trello/core.rb",
+    "lib/pivotal_to_trello/pivotal_wrapper.rb",
     "lib/pivotal_to_trello/runner.rb",
+    "lib/pivotal_to_trello/trello_wrapper.rb",
     "pivotal-to-trello.gemspec",
-    "spec/pivotal-to-trello_spec.rb",
+    "spec/pivotal_to_trello/core_spec.rb",
+    "spec/pivotal_to_trello/pivotal_wrapper_spec.rb",
+    "spec/pivotal_to_trello/trello_wrapper_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/recurser/pivotal-to-trello"
@@ -43,14 +47,16 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ruby-trello>, [">= 0"])
+      s.add_runtime_dependency(%q<highline>, [">= 0"])
+      s.add_runtime_dependency(%q<ruby-trello>, [">= 1.0.0"])
       s.add_runtime_dependency(%q<pivotal-tracker>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<rdoc>, [">= 0"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
     else
-      s.add_dependency(%q<ruby-trello>, [">= 0"])
+      s.add_dependency(%q<highline>, [">= 0"])
+      s.add_dependency(%q<ruby-trello>, [">= 1.0.0"])
       s.add_dependency(%q<pivotal-tracker>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<rdoc>, [">= 0"])
@@ -58,7 +64,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jeweler>, [">= 0"])
     end
   else
-    s.add_dependency(%q<ruby-trello>, [">= 0"])
+    s.add_dependency(%q<highline>, [">= 0"])
+    s.add_dependency(%q<ruby-trello>, [">= 1.0.0"])
     s.add_dependency(%q<pivotal-tracker>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<rdoc>, [">= 0"])

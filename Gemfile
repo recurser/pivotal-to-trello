@@ -1,9 +1,7 @@
 source 'http://rubygems.org'
-# Add dependencies required to use your gem here.
-# Example:
-#   gem 'activesupport', '>= 2.3.5'
 
-gem 'ruby-trello'
+gem 'highline'
+gem 'ruby-trello', '>= 1.0.0 '
 gem 'pivotal-tracker'
 
 # Add dependencies to develop your gem here.
