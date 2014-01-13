@@ -54,7 +54,7 @@ module PivotalToTrello
 
         if list_id
           card = trello.create_card(list_id, story)
-          trello.add_label(card, label)
+          trello.add_label(card, label) unless label.nil?
         end
       end
     end
