@@ -96,6 +96,13 @@ describe 'Core' do
         trello.should_receive(:add_label).with(card, core.options.bug_label)
         core.import!
       end
+
+      it 'ignores nil labels' do
+        core.options.stub(:bug_label => nil)
+        story.stub(:story_type => 'bug')
+        trello.should_not_receive(:add_label)
+        core.import!
+      end
     end
   end
 end
