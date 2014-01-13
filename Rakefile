@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.license     = "MIT"
   gem.homepage    = "http://github.com/recurser/pivotal-to-trello"
   gem.summary     = %Q{Pivotal Tracker to Trello exporter}
-  gem.description = %Q{Pulls pivotal tracker stories and imports them into Trello}
+  gem.description = %Q{Pulls stories from Pivotal Tracker and imports them into Trello}
   gem.email       = "hello@daveperrett.com"
   gem.authors     = ["Dave Perrett"]
   # dependencies defined in Gemfile
