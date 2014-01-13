@@ -1,4 +1,4 @@
-pivotal-to-trello
+pivotal-to-trello [![Build Status](https://travis-ci.org/recurser/pivotal-to-trello.png?branch=master)](https://travis-ci.org/recurser/pivotal-to-trello)
 =================
 
 This gem provides a command for exporting a [Pivotal Tracker](https://www.pivotaltracker.com/) project to [Trello](https://trello.com/).
