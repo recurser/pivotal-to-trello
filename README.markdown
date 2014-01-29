@@ -224,7 +224,7 @@ Click the *Allow* button, and you will be presented with a 64-character token.
 
 See the [Trello documentation](https://trello.com/docs/gettingstarted/index.html#getting-an-application-key) for more details.
 
-The Pivotal Tracker token can be found at the bottom of your [Pivotal profile page](https://www.pivotaltracker.com/profile).
+The Pivotal Tracker token can be found at the bottom of your [Pivotal profile page](https://www.pivotaltracker.com/profile).  Make sure that "Require HTTPS for API Access" is OFF!
 
 Change history
 --------------
@@ -257,4 +257,4 @@ Dave Perrett :: hello@daveperrett.com :: [@daveperrett](http://twitter.com/davep
 Copyright
 ---------
 
-Copyright (c) 2014 Dave Perrett. See [License](https://github.com/recurser/jquery-i18n/blob/master/LICENSE) for details.
+Copyright (c) 2017 Dave Perrett. See [License](https://github.com/recurser/jquery-i18n/blob/master/LICENSE) for details.
