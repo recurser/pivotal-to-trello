@@ -27,6 +27,19 @@ module PivotalToTrello
           card.add_comment("[#{note.author}] #{note.text.to_s.strip}") unless note.text.to_s.strip.empty?
         end
 
+        tasks = pivotal_story.tasks.all
+        if !tasks.empty?
+          checklist = Trello::Checklist.create( 
+            :name     => 'Tasks',
+            :board_id => card.board_id
+          )
+          card.add_checklist(checklist)
+          tasks.each do |task|
+            puts " Creating task '#{task.description}'"
+            checklist.add_item(task.description, task.complete)
+          end
+        end
+
         card
       end
 
