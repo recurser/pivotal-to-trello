@@ -34,6 +34,7 @@ def mock_pivotal_story(options = {})
   }.merge(options)
   story = double(PivotalTracker::Story)
   story.stub_chain(:notes, :all).and_return([])
+  story.stub_chain(:tasks, :all).and_return([])
   options.each { |k, v| story.stub(k => v) }
   story
 end
@@ -42,6 +43,7 @@ def mock_trello_card(options = {})
   options = {
     :name => 'My Card',
     :desc => 'My Description',
+    :board_id => 1234321,
   }.merge(options)
   card = double(Trello::Card)
   options.each { |k, v| card.stub(k => v) }
