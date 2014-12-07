@@ -1,7 +1,7 @@
 pivotal-to-trello [![Build Status](https://travis-ci.org/recurser/pivotal-to-trello.png?branch=master)](https://travis-ci.org/recurser/pivotal-to-trello)
 =================
 
-This gem provides a command for exporting a [Pivotal Tracker](https://www.pivotaltracker.com/) project to [Trello](https://trello.com/).
+This repo provides a command for exporting a [Pivotal Tracker](https://www.pivotaltracker.com/) project to [Trello](https://trello.com/). The command is available as a gem or a docker container.
 
 Getting started
 ---------------
@@ -9,6 +9,12 @@ Getting started
 1. Install the gem:
 
         > gem install pivotal-to-trello
+
+   Or pull the container down using Docker:
+
+        > docker pull kennethkalmer/pivotal-to-trello
+
+   When using the docker container, substitute every occurance of `pivotal-to-tracker` with `sudo docker run -a -i kennethkalmer/pivotal-to-tracker`
 
 2. Run the importer:
 
