@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'highline',        '>= 1.6.20'
-gem 'ruby-trello',     '>= 1.1.0'
+gem 'ruby-trello',     '>= 1.1.3'
 gem 'pivotal-tracker', '>= 0.5.12'
 
 group :development do
