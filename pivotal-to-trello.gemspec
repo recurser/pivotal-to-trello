@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
-  s.authors = ["Dave Perrett"]
-  s.date = "2017-08-09"
+  s.authors = ["Dave Perrett", "Erik Frederiksen", "Kenneth Kalmer"]
+  s.date = "2017-08-10"
   s.description = "Pulls stories from Pivotal Tracker and imports them into Trello"
   s.email = "hello@daveperrett.com"
   s.executables = ["pivotal-to-trello"]
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     ".rubocop.yml",
+    "Dockerfile",
     "Gemfile",
     "LICENSE.txt",
     "README.markdown",
