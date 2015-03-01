@@ -20,4 +20,5 @@ COPY . /app
 RUN cd /app && bundle install --without development
 
 # And run
-ENTRYPOINT ["BUNDLE_GEMFILE=/app/Gemfile bundle exec /app/bin/pivotal-to-trello"]
+WORKDIR /app
+ENTRYPOINT ["bundle exec /app/bin/pivotal-to-trello"]
