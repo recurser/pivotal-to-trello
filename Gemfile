@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'highline',        '>= 1.6.20'
 gem 'ruby-trello',     '>= 1.1.3'
-gem 'pivotal-tracker', '>= 0.5.12'
+gem 'pivotal-tracker', '>= 0.5.12', github: 'fightingmonk/pivotal-tracker', branch: 'master'
 
 group :development do
   gem 'rspec',   '>= 2.14.1'
