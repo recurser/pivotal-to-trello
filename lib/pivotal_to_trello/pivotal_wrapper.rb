@@ -20,7 +20,7 @@ module PivotalToTrello
 
     # Returns all stories for the given project.
     def stories(project_id)
-      project(project_id).stories.all
+      project(project_id).stories.all.sort_by(&:created_at)
     end
 
     private

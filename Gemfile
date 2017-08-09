@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'highline',        '>= 1.6.20'
-gem 'ruby-trello',     '>= 1.1.0'
-gem 'pivotal-tracker', '>= 0.5.12'
+gem 'highline',        '~> 1.7.8'
+gem 'ruby-trello',     '~> 2.0.0'
+gem 'pivotal-tracker', '~> 0.5.13'
 
 group :development do
   gem 'rspec',   '>= 2.14.1'

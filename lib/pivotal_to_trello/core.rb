@@ -43,18 +43,18 @@ module PivotalToTrello
         end
 
         if story.story_type == 'bug' && options.bug_label
-          label = options.bug_label
+          label_color = options.bug_label
         elsif story.story_type == 'feature' && options.feature_label
-          label = options.feature_label
+          label_color = options.feature_label
         elsif story.story_type == 'chore' && options.chore_label
-          label = options.chore_label
+          label_color = options.chore_label
         elsif story.story_type == 'release' && options.release_label
-          label = options.release_label
+          label_color = options.release_label
         end
 
         if list_id
           card = trello.create_card(list_id, story)
-          trello.add_label(card, label) unless label.nil?
+          trello.add_label(card, story.story_type, label_color) unless label_color.nil?
         end
       end
     end
