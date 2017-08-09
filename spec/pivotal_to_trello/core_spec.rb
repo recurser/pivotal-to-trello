@@ -7,8 +7,8 @@ describe 'Core' do
 
   before(:each) do
     allow_any_instance_of(IO).to receive(:puts)
-    allow(core).to receive_messages(:pivotal => pivotal)
-    allow(core).to receive_messages(:trello  => trello)
+    allow(core).to receive_messages(pivotal: pivotal)
+    allow(core).to receive_messages(trello: trello)
 
     allow(core).to receive(:prompt_selection).with('Which Pivotal project would you like to export?', pivotal.project_choices).and_return('pivotal_project_id')
     allow(core).to receive(:prompt_selection).with('Which Trello board would you like to import into?', trello.board_choices).and_return('trello_board_id')
@@ -40,66 +40,66 @@ describe 'Core' do
 
       before(:each) do
         expect(pivotal).to receive(:stories).and_return([story])
-        allow(trello).to receive_messages(:add_label => true, :create_card => card)
+        allow(trello).to receive_messages(add_label: true, create_card: card)
       end
 
       it 'handles accepted stories' do
-        allow(story).to receive_messages(:current_state => 'accepted')
+        allow(story).to receive_messages(current_state: 'accepted')
         expect(trello).to receive(:create_card).with(core.options.accepted_list_id, story).and_return(card)
         core.import!
       end
 
       it 'handles rejected stories' do
-        allow(story).to receive_messages(:current_state => 'rejected')
+        allow(story).to receive_messages(current_state: 'rejected')
         expect(trello).to receive(:create_card).with(core.options.rejected_list_id, story).and_return(card)
         core.import!
       end
 
       it 'handles finished stories' do
-        allow(story).to receive_messages(:current_state => 'finished')
+        allow(story).to receive_messages(current_state: 'finished')
         expect(trello).to receive(:create_card).with(core.options.finished_list_id, story).and_return(card)
         core.import!
       end
 
       it 'handles delivered stories' do
-        allow(story).to receive_messages(:current_state => 'delivered')
+        allow(story).to receive_messages(current_state: 'delivered')
         expect(trello).to receive(:create_card).with(core.options.delivered_list_id, story).and_return(card)
         core.import!
       end
 
       it 'handles unstarted features' do
-        allow(story).to receive_messages(:current_state => 'unstarted', :story_type => 'feature')
+        allow(story).to receive_messages(current_state: 'unstarted', story_type: 'feature')
         expect(trello).to receive(:create_card).with(core.options.feature_list_id, story).and_return(card)
         core.import!
       end
 
       it 'handles unstarted chores' do
-        allow(story).to receive_messages(:current_state => 'unstarted', :story_type => 'chore')
+        allow(story).to receive_messages(current_state: 'unstarted', story_type: 'chore')
         expect(trello).to receive(:create_card).with(core.options.chore_list_id, story).and_return(card)
         core.import!
       end
 
       it 'handles unstarted bugs' do
-        allow(story).to receive_messages(:current_state => 'unstarted', :story_type => 'bug')
+        allow(story).to receive_messages(current_state: 'unstarted', story_type: 'bug')
         expect(trello).to receive(:create_card).with(core.options.bug_list_id, story).and_return(card)
         core.import!
       end
 
       it 'handles unstarted releases' do
-        allow(story).to receive_messages(:current_state => 'unstarted', :story_type => 'release')
+        allow(story).to receive_messages(current_state: 'unstarted', story_type: 'release')
         expect(trello).to receive(:create_card).with(core.options.release_list_id, story).and_return(card)
         core.import!
       end
 
       it 'labels stories' do
-        allow(story).to receive_messages(:story_type => 'bug')
+        allow(story).to receive_messages(story_type: 'bug')
         expect(trello).to receive(:add_label).with(card, 'bug', core.options.bug_label)
         core.import!
       end
 
       it 'ignores nil labels' do
-        allow(core.options).to receive_messages(:bug_label => nil)
-        allow(story).to receive_messages(:story_type => 'bug')
+        allow(core.options).to receive_messages(bug_label: nil)
+        allow(story).to receive_messages(story_type: 'bug')
         expect(trello).not_to receive(:add_label)
         core.import!
       end

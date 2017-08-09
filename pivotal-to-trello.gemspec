@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Dave Perrett"]
-  s.date = "2014-01-13"
+  s.date = "2017-08-09"
   s.description = "Pulls stories from Pivotal Tracker and imports them into Trello"
   s.email = "hello@daveperrett.com"
   s.executables = ["pivotal-to-trello"]
@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".rubocop.yml",
     "Gemfile",
     "LICENSE.txt",
     "README.markdown",
@@ -40,7 +41,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/recurser/pivotal-to-trello"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.2.1"
+  s.rubygems_version = "2.4.5"
   s.summary = "Pivotal Tracker to Trello exporter"
 
   if s.respond_to? :specification_version then
@@ -52,14 +53,16 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<pivotal-tracker>, ["~> 0.5.13"])
       s.add_development_dependency(%q<rspec>, [">= 2.14.1"])
       s.add_development_dependency(%q<rdoc>, [">= 4.1.1"])
-      s.add_development_dependency(%q<jeweler>, [">= 2.0.0"])
+      s.add_development_dependency(%q<jeweler>, [">= 2.3.7"])
+      s.add_development_dependency(%q<rubocop>, [">= 0.49.1"])
     else
       s.add_dependency(%q<highline>, ["~> 1.7.8"])
       s.add_dependency(%q<ruby-trello>, ["~> 2.0.0"])
       s.add_dependency(%q<pivotal-tracker>, ["~> 0.5.13"])
       s.add_dependency(%q<rspec>, [">= 2.14.1"])
       s.add_dependency(%q<rdoc>, [">= 4.1.1"])
-      s.add_dependency(%q<jeweler>, [">= 2.0.0"])
+      s.add_dependency(%q<jeweler>, [">= 2.3.7"])
+      s.add_dependency(%q<rubocop>, [">= 0.49.1"])
     end
   else
     s.add_dependency(%q<highline>, ["~> 1.7.8"])
@@ -67,7 +70,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<pivotal-tracker>, ["~> 0.5.13"])
     s.add_dependency(%q<rspec>, [">= 2.14.1"])
     s.add_dependency(%q<rdoc>, [">= 4.1.1"])
-    s.add_dependency(%q<jeweler>, [">= 2.0.0"])
+    s.add_dependency(%q<jeweler>, [">= 2.3.7"])
+    s.add_dependency(%q<rubocop>, [">= 0.49.1"])
   end
 end
 

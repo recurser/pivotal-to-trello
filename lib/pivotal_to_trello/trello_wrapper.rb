@@ -3,7 +3,6 @@ require 'trello'
 module PivotalToTrello
   # Interface to the Trello API.
   class TrelloWrapper
-
     # Constructor
     def initialize(key, token)
       Trello.configure do |config|
@@ -18,9 +17,9 @@ module PivotalToTrello
       card ||= begin
         puts "Creating a card for #{pivotal_story.story_type} '#{pivotal_story.name}'."
         card = Trello::Card.create(
-          :name    => pivotal_story.name,
-          :desc    => pivotal_story.description,
-          :list_id => list_id
+          name:    pivotal_story.name,
+          desc:    pivotal_story.description,
+          list_id: list_id,
         )
 
         pivotal_story.notes.all.each do |note|
@@ -38,9 +37,9 @@ module PivotalToTrello
 
     # Returns a hash of available boards, keyed on board ID.
     def board_choices
-      Trello::Board.all.inject({}) do |hash, board|
+      Trello::Board.all.each_with_object({}) do |board, hash|
         hash[board.id] = board.name
-        hash
+
       end
     end
 
@@ -49,9 +48,9 @@ module PivotalToTrello
       # Cache the list to improve performance.
       @lists           ||= {}
       @lists[board_id] ||= begin
-        choices = Trello::Board.find(board_id).lists.inject({}) do |hash, list|
+        choices = Trello::Board.find(board_id).lists.each_with_object({}) do |list, hash|
           hash[list.id] = list.name
-          hash
+
         end
         choices        = Hash[choices.sort_by { |_, v| v }]
         choices[false] = "[don't import these stories]"
@@ -64,9 +63,9 @@ module PivotalToTrello
     # Returns a list of all cards in the given list, keyed on name.
     def cards_for_list(list_id)
       @cards          ||= {}
-      @cards[list_id] ||= Trello::List.find(list_id).cards.inject({}) do |hash, card|
+      @cards[list_id] ||= Trello::List.find(list_id).cards.each_with_object({}) do |card, hash|
         hash[card_hash(card.name, card.desc)] = card
-        hash
+
       end
 
       @cards[list_id]
@@ -79,7 +78,7 @@ module PivotalToTrello
       label                    = @labels[card.board_id].find { |l| l.name == label_name && l.color == label_color }
       label                  ||= Trello::Label.create(name: label_name, board_id: card.board_id, color: label_color)
 
-      card.add_label(label) unless card.labels.detect { |l| l.id == label.id  }
+      card.add_label(label) unless card.labels.detect { |l| l.id == label.id }
     end
 
     # Returns a list of colors that can be used to label cards.
@@ -91,22 +90,21 @@ module PivotalToTrello
         'purple' => 'Purple',
         'red'    => 'Red',
         'yellow' => 'Yellow',
-        false    => '[none]'
+        false    => '[none]',
       }
     end
 
     private
 
-      # Returns a unique identifier for this list/name/description combination.
-      def card_hash(name, description)
-        Digest::SHA1.hexdigest("#{name}_#{description}")
-      end
+    # Returns a unique identifier for this list/name/description combination.
+    def card_hash(name, description)
+      Digest::SHA1.hexdigest("#{name}_#{description}")
+    end
 
-      # Returns a card with the given name and description if it exists in the given list, nil otherwise.
-      def get_card(list_id, name, description)
-        key = card_hash(name, description)
-        cards_for_list(list_id)[key] if !cards_for_list(list_id)[key].nil?
-      end
-
+    # Returns a card with the given name and description if it exists in the given list, nil otherwise.
+    def get_card(list_id, name, description)
+      key = card_hash(name, description)
+      cards_for_list(list_id)[key] unless cards_for_list(list_id)[key].nil?
+    end
   end
 end
