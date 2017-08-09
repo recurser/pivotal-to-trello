@@ -1,0 +1,101 @@
+# See example at https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+AllCops:
+  TargetRubyVersion: 2.2
+  Exclude:
+    - 'Gemfile'
+
+# Align the elements of a hash literal if they span more than one line.
+AlignHash:
+  # Alignment of entries using hash rocket as separator. Valid values are:
+  #
+  # key - left alignment of keys
+  #   'a' => 2
+  #   'bb' => 3
+  # separator - alignment of hash rockets, keys are right aligned
+  #    'a' => 2
+  #   'bb' => 3
+  # table - left alignment of keys, hash rockets, and values
+  #   'a'  => 2
+  #   'bb' => 3
+  EnforcedHashRocketStyle: table
+  # Alignment of entries using colon as separator. Valid values are:
+  #
+  # key - left alignment of keys
+  #   a: 0
+  #   bb: 1
+  # separator - alignment of colons, keys are right aligned
+  #    a: 0
+  #   bb: 1
+  # table - left alignment of keys and values
+  #   a:  0
+  #   bb: 1
+  EnforcedColonStyle: table
+
+Documentation:
+  Enabled: false
+
+EmptyLines:
+  Enabled: false
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+LineLength:
+  Max: 170
+
+Metrics/AbcSize:
+  Enabled: true
+  Max:     40
+
+Metrics/ClassLength:
+  Enabled:       false
+  CountComments: false
+
+Metrics/BlockLength:
+  Enabled:       false
+  CountComments: false
+
+Metrics/MethodLength:
+  Enabled:       true
+  CountComments: false
+  Max:           25
+
+ParameterLists:
+  Max: 7
+  CountKeywordArgs: true
+
+SpaceInsideParens:
+  Enabled: false
+
+SpaceBeforeFirstArg:
+  Enabled: false
+
+Style/AndOr:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled:       true
+  EnforcedStyle: nested
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  Enabled:                   true
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInLiteral:
+  Enabled:                   true
+  EnforcedStyleForMultiline: comma
+
+Style/WordArray:
+  Enabled: false
