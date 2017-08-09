@@ -24,33 +24,33 @@ describe 'TrelloWrapper' do
       story = mock_pivotal_story
       expect(wrapper).to receive(:get_card).and_return(nil)
       expect(Trello::Card).to receive(:create).with(
-        :name    => story.name,
-        :desc    => story.description,
-        :list_id => 'list_id'
+        name:    story.name,
+        desc:    story.description,
+        list_id: 'list_id',
       ).and_return(card)
       expect(wrapper.create_card('list_id', story)).to eq(card)
     end
 
     it 'does not create a new card if one exists with the same name' do
-      story = mock_pivotal_story(:name => 'My Card')
+      story = mock_pivotal_story(name: 'My Card')
       allow(Trello::List).to receive_message_chain(:find, :cards).and_return([card])
       expect(Trello::Card).not_to receive(:create)
       expect(wrapper.create_card('list_id', story)).to eq(card)
     end
 
     it 'creates a new card if one exists with a different name' do
-      story = mock_pivotal_story(:name => 'My Foo')
+      story = mock_pivotal_story(name: 'My Foo')
       allow(Trello::List).to receive_message_chain(:find, :cards).and_return([card])
       expect(Trello::Card).to receive(:create).with(
-        :name    => story.name,
-        :desc    => story.description,
-        :list_id => 'list_id'
+        name:    story.name,
+        desc:    story.description,
+        list_id: 'list_id',
       ).and_return(card)
       expect(wrapper.create_card('list_id', story)).to eq(card)
     end
 
     it 'adds comments' do
-      note  = OpenStruct.new(:text => 'My Note', :author => 'John Smith')
+      note  = OpenStruct.new(text: 'My Note', author: 'John Smith')
       story = mock_pivotal_story
       allow(story).to receive_message_chain(:notes, :all).and_return([note])
       expect(wrapper).to receive(:get_card).and_return(nil)
@@ -62,32 +62,30 @@ describe 'TrelloWrapper' do
 
   context '#board_choices' do
     it 'returns a hash of Trello boards' do
-      board = OpenStruct.new(:id => 'id', :name => 'My Board')
+      board = OpenStruct.new(id: 'id', name: 'My Board')
       expect(Trello::Board).to receive(:all).and_return([board])
-      expect(wrapper.board_choices).to eq({ 'id' => 'My Board'})
+      expect(wrapper.board_choices).to eq('id' => 'My Board')
     end
   end
 
   context '#list_choices' do
     it 'returns a hash of Trello lists' do
       board = double(Trello::Board)
-      list  = OpenStruct.new(:id => 'id', :name => 'My List')
+      list  = OpenStruct.new(id: 'id', name: 'My List')
       expect(Trello::Board).to receive(:find).with('board_id').and_return(board)
       expect(board).to receive(:lists).and_return([list])
-      expect(wrapper.list_choices('board_id')).to eq({
-        'id'  => 'My List',
-        false => "[don't import these stories]",
-      })
+      expect(wrapper.list_choices('board_id')).to eq( 'id'  => 'My List',
+                                                      false => "[don't import these stories]")
     end
   end
 
   context '#cards_for_list' do
     it 'returns a hash of Trello lists' do
       list = double(Trello::List)
-      card  = OpenStruct.new(:name => 'My Card', :desc => 'My Description')
+      card = OpenStruct.new(name: 'My Card', desc: 'My Description')
       expect(Trello::List).to receive(:find).with('list_id').and_return(list)
       expect(list).to receive(:cards).and_return([card])
-      expected = {'193060beddd00d64259bdc1271d6c5a330e92e7d' => card}
+      expected = { '193060beddd00d64259bdc1271d6c5a330e92e7d' => card }
       expect(wrapper.cards_for_list('list_id')).to eq(expected)
       # Test caching.
       expect(Trello::List).not_to receive(:find)
@@ -105,18 +103,18 @@ describe 'TrelloWrapper' do
 
     it 'adds a label if it does not already exist' do
       label = double(Trello::Label)
-      card  = mock_trello_card({ board_id: 'board_id' })
-      allow(card).to receive_messages(:labels => [])
-      expect(Trello::Label).to receive(:create).with({ name: 'bug', board_id: 'board_id', color: 'red' }).and_return(label)
+      card  = mock_trello_card(board_id: 'board_id')
+      allow(card).to receive_messages(labels: [])
+      expect(Trello::Label).to receive(:create).with(name: 'bug', board_id: 'board_id', color: 'red').and_return(label)
       expect(card).to receive(:add_label).with(label)
       wrapper.add_label(card, 'bug', 'red')
     end
 
     it 'does not add a label if it already exists' do
       label = double(Trello::Label, id: '1234', name: 'bug', color: 'red')
-      card  = mock_trello_card({ board_id: 'board_id' })
+      card  = mock_trello_card(board_id: 'board_id')
       allow(board).to receive(:labels).and_return([label])
-      allow(card).to receive_messages(:labels => [label])
+      allow(card).to receive_messages(labels: [label])
       expect(card).not_to receive(:add_label)
       wrapper.add_label(card, 'bug', 'red')
     end

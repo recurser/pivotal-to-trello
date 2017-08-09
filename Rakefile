@@ -6,7 +6,7 @@ begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
+  $stderr.puts 'Run `bundle install` to install missing gems'
   exit e.status_code
 end
 require 'rake'
@@ -14,13 +14,13 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name        = "pivotal-to-trello"
-  gem.license     = "MIT"
-  gem.homepage    = "http://github.com/recurser/pivotal-to-trello"
-  gem.summary     = %Q{Pivotal Tracker to Trello exporter}
-  gem.description = %Q{Pulls stories from Pivotal Tracker and imports them into Trello}
-  gem.email       = "hello@daveperrett.com"
-  gem.authors     = ["Dave Perrett"]
+  gem.name        = 'pivotal-to-trello'
+  gem.license     = 'MIT'
+  gem.homepage    = 'http://github.com/recurser/pivotal-to-trello'
+  gem.summary     = %(Pivotal Tracker to Trello exporter)
+  gem.description = %(Pulls stories from Pivotal Tracker and imports them into Trello)
+  gem.email       = 'hello@daveperrett.com'
+  gem.authors     = ['Dave Perrett']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -36,11 +36,11 @@ RSpec::Core::RakeTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
-task :default => :spec
+task default: :spec
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "pivotal-to-trello #{version}"

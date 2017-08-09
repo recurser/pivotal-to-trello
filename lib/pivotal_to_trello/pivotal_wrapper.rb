@@ -3,7 +3,6 @@ require 'pivotal-tracker'
 module PivotalToTrello
   # Interface to the Pivotal Tracker API.
   class PivotalWrapper
-
     # Constructor
     def initialize(token)
       ::PivotalTracker::Client.token = token
@@ -12,9 +11,9 @@ module PivotalToTrello
 
     # Returns a hash of available projects keyed on project ID.
     def project_choices
-      ::PivotalTracker::Project.all.inject({}) do |hash, project|
+      ::PivotalTracker::Project.all.each_with_object({}) do |project, hash|
         hash[project.id] = project.name
-        hash
+
       end
     end
 
@@ -25,11 +24,10 @@ module PivotalToTrello
 
     private
 
-      # Returns the Pivotal project that we're exporting.
-      def project(project_id)
-        @projects             ||= {}
-        @projects[project_id] ||= ::PivotalTracker::Project.find(project_id)
-      end
-
+    # Returns the Pivotal project that we're exporting.
+    def project(project_id)
+      @projects             ||= {}
+      @projects[project_id] ||= ::PivotalTracker::Project.find(project_id)
+    end
   end
 end
