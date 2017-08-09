@@ -19,12 +19,14 @@ describe 'PivotalWrapper' do
   end
 
   context '#stories' do
-    it 'returns an array of pivotal stories' do
-      story   = mock_pivotal_story
+    it 'returns a sorted array of pivotal stories' do
+      first_story = mock_pivotal_story(created_at: Time.now - 10000)
+      last_story  = mock_pivotal_story(created_at: Time.now + 10000)
       project = double(PivotalTracker::Project)
       expect(::PivotalTracker::Project).to receive(:find).with('project_id').and_return(project)
-      allow(project).to receive_message_chain(:stories, :all).and_return([story])
-      expect(wrapper.stories('project_id')).to eq([story])
+      allow(project).to receive_message_chain(:stories, :all).and_return([last_story, first_story])
+      expect(wrapper.stories('project_id').first).to eq(first_story)
+      expect(wrapper.stories('project_id').last).to eq(last_story)
     end
   end
 end
