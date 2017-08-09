@@ -7,6 +7,7 @@ module PivotalToTrello
     # Constructor
     def initialize(token)
       ::PivotalTracker::Client.token = token
+      ::PivotalTracker::Client.use_ssl = true
     end
 
     # Returns a hash of available projects keyed on project ID.
