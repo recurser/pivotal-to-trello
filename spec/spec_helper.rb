@@ -12,16 +12,16 @@ end
 
 def mock_pivotal_wrapper
   pivotal = double(PivotalToTrello::PivotalWrapper)
-  pivotal.stub(:project_choices => {})
-  pivotal.stub(:stories         => [])
+  allow(pivotal).to receive_messages(:project_choices => {})
+  allow(pivotal).to receive_messages(:stories         => [])
   pivotal
 end
 
 def mock_trello_wrapper
   trello = double(PivotalToTrello::TrelloWrapper)
-  trello.stub(:board_choices => {})
-  trello.stub(:list_choices  => {})
-  trello.stub(:label_choices => {})
+  allow(trello).to receive_messages(:board_choices => {})
+  allow(trello).to receive_messages(:list_choices  => {})
+  allow(trello).to receive_messages(:label_choices => {})
   trello
 end
 
@@ -33,8 +33,8 @@ def mock_pivotal_story(options = {})
     :story_type    => 'feature',
   }.merge(options)
   story = double(PivotalTracker::Story)
-  story.stub_chain(:notes, :all).and_return([])
-  options.each { |k, v| story.stub(k => v) }
+  allow(story).to receive_message_chain(:notes, :all).and_return([])
+  options.each { |k, v| allow(story).to receive_messages(k => v) }
   story
 end
 
@@ -44,7 +44,7 @@ def mock_trello_card(options = {})
     :desc => 'My Description',
   }.merge(options)
   card = double(Trello::Card)
-  options.each { |k, v| card.stub(k => v) }
+  options.each { |k, v| allow(card).to receive_messages(k => v) }
   card
 end
 
