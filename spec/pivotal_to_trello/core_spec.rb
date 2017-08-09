@@ -93,7 +93,7 @@ describe 'Core' do
 
       it 'labels stories' do
         story.stub(:story_type => 'bug')
-        trello.should_receive(:add_label).with(card, core.options.bug_label)
+        trello.should_receive(:add_label).with(card, 'bug', core.options.bug_label)
         core.import!
       end
 

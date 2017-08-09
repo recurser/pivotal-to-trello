@@ -73,8 +73,13 @@ module PivotalToTrello
     end
 
     # Adds the given label to the card.
-    def add_label(card, label)
-      card.add_label(label) unless card.labels.collect { |label| label.color }.include?(label)
+    def add_label(card, label_name, label_color)
+      @labels                ||= {}
+      @labels[card.board_id] ||= Trello::Board.find(card.board_id).labels
+      label                    = @labels[card.board_id].find { |l| l.name == label_name && l.color == label_color }
+      label                  ||= Trello::Label.create(name: label_name, board_id: card.board_id, color: label_color)
+
+      card.add_label(label) unless card.labels.detect { |l| l.id == label.id  }
     end
 
     # Returns a list of colors that can be used to label cards.

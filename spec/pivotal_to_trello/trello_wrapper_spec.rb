@@ -96,18 +96,29 @@ describe 'TrelloWrapper' do
   end
 
   context '#add_label' do
+    let(:board) { double(Trello::Board) }
+
+    before do
+      Trello::Board.should_receive(:find).with('board_id').and_return(board)
+      allow(board).to receive(:labels).and_return([])
+    end
+
     it 'adds a label if it does not already exist' do
-      card = mock_trello_card
+      label = double(Trello::Label)
+      card  = mock_trello_card({ board_id: 'board_id' })
       card.stub(:labels => [])
-      card.should_receive(:add_label).with('red')
-      wrapper.add_label(card, 'red')
+      Trello::Label.should_receive(:create).with({ name: 'bug', board_id: 'board_id', color: 'red' }).and_return(label)
+      card.should_receive(:add_label).with(label)
+      wrapper.add_label(card, 'bug', 'red')
     end
 
     it 'does not add a label if it already exists' do
-      card = mock_trello_card
-      card.stub(:labels => [OpenStruct.new(:color => 'red')])
+      label = double(Trello::Label, id: '1234', name: 'bug', color: 'red')
+      card  = mock_trello_card({ board_id: 'board_id' })
+      allow(board).to receive(:labels).and_return([label])
+      card.stub(:labels => [label])
       card.should_not_receive(:add_label)
-      wrapper.add_label(card, 'red')
+      wrapper.add_label(card, 'bug', 'red')
     end
   end
 
