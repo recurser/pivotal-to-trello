@@ -41,6 +41,7 @@ end
 
 def mock_trello_card(options = {})
   options = {
+    id:       1_234,
     name:     'My Card',
     desc:     'My Description',
     board_id: 1_234_321,
