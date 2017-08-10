@@ -9,7 +9,7 @@ RUN apt-get -y update &&\
     apt-get update -q
 
 RUN apt-get install -y build-essential zlib1g-dev libxml2-dev \
-    ruby2.1 ruby2.1-dev git-core &&\
+    ruby2.2 ruby2.2-dev &&\
     gem install bundler --no-rdoc --no-ri
 
 # Prepare
