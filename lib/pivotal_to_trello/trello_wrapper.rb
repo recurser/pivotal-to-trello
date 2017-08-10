@@ -27,10 +27,10 @@ module PivotalToTrello
         end
 
         tasks = pivotal_story.tasks.all
-        if !tasks.empty?
-          checklist = Trello::Checklist.create( 
-            :name     => 'Tasks',
-            :board_id => card.board_id
+        unless tasks.empty?
+          checklist = Trello::Checklist.create(
+            name:     'Tasks',
+            board_id: card.board_id,
           )
           card.add_checklist(checklist)
           tasks.each do |task|
