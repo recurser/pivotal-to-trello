@@ -22,10 +22,8 @@ module PivotalToTrello
           list_id: list_id,
         )
 
-        pivotal_story.notes.all.each do |note|
-          card.add_comment("[#{note.author}] #{note.text.to_s.strip}") unless note.text.to_s.strip.empty?
-        end
-
+        create_notes(card, pivotal_story)
+        create_tasks(card, pivotal_story)
         card
       end
 
@@ -39,7 +37,6 @@ module PivotalToTrello
     def board_choices
       Trello::Board.all.each_with_object({}) do |board, hash|
         hash[board.id] = board.name
-
       end
     end
 
@@ -50,7 +47,6 @@ module PivotalToTrello
       @lists[board_id] ||= begin
         choices = Trello::Board.find(board_id).lists.each_with_object({}) do |list, hash|
           hash[list.id] = list.name
-
         end
         choices        = Hash[choices.sort_by { |_, v| v }]
         choices[false] = "[don't import these stories]"
@@ -65,7 +61,6 @@ module PivotalToTrello
       @cards          ||= {}
       @cards[list_id] ||= Trello::List.find(list_id).cards.each_with_object({}) do |card, hash|
         hash[card_hash(card.name, card.desc)] = card
-
       end
 
       @cards[list_id]
@@ -95,6 +90,27 @@ module PivotalToTrello
     end
 
     private
+
+    # Copies notes from the pivotal story to the card.
+    def create_notes(card, pivotal_story)
+      pivotal_story.notes.all.each do |note|
+        card.add_comment("[#{note.author}] #{note.text.to_s.strip}") unless note.text.to_s.strip.empty?
+      end
+    end
+
+    # Copies notes from the pivotal story to the card.
+    def create_tasks(card, pivotal_story)
+      tasks = pivotal_story.tasks.all
+      return if tasks.empty?
+
+      checklist = Trello::Checklist.create(name: 'Tasks', card_id: card.id)
+      card.add_checklist(checklist)
+
+      tasks.each do |task|
+        puts " - Creating task '#{task.description}'"
+        checklist.add_item(task.description, task.complete)
+      end
+    end
 
     # Returns a unique identifier for this list/name/description combination.
     def card_hash(name, description)
