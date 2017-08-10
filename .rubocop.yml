@@ -3,6 +3,7 @@ AllCops:
   TargetRubyVersion: 2.2
   Exclude:
     - 'Gemfile'
+    - 'pivotal-to-trello.gemspec'
 
 # Align the elements of a hash literal if they span more than one line.
 AlignHash:
@@ -41,7 +42,7 @@ Layout/EmptyLinesAroundBlockBody:
   Enabled: false
 
 LineLength:
-  Max: 170
+  Max: 180
 
 Metrics/AbcSize:
   Enabled: true
