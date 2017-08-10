@@ -235,6 +235,9 @@ The Pivotal Tracker token can be found at the bottom of your [Pivotal profile pa
 Change history
 --------------
 
+* **Version 0.2.0 (2017-08-10)** : Fix label creation, update gem dependencies, add checklist support (thanks @rikthevik!), add docker support (thanks @kennethkalmer!).
+* **Version 0.1.2 (2014-01-13)** : Update version number in the gemspec.
+* **Version 0.1.1 (2014-01-13)** : Specify gem dependencies.
 * **Version 0.1.0 (2014-01-13)** : Initial version.
 
 Bug Reports
