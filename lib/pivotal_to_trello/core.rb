@@ -15,46 +15,12 @@ module PivotalToTrello
 
       puts "\nBeginning import..."
       pivotal.stories(options.pivotal_project_id).each do |story|
-        list_id = label = nil
+        list_id = get_list_id(story, options)
+        next unless list_id
 
-        if story.current_state == 'accepted'
-          list_id = options.accepted_list_id
-        elsif story.current_state == 'rejected'
-          list_id = options.rejected_list_id
-        elsif story.current_state == 'finished'
-          list_id = options.finished_list_id
-        elsif story.current_state == 'delivered'
-          list_id = options.delivered_list_id
-        elsif story.current_state == 'started'
-          list_id = options.current_list_id
-        elsif story.current_state == 'unscheduled'
-          list_id = options.icebox_list_id
-        elsif story.current_state == 'unstarted' && story.story_type == 'feature'
-          list_id = options.feature_list_id
-        elsif story.current_state == 'unstarted' && story.story_type == 'chore'
-          list_id = options.chore_list_id
-        elsif story.current_state == 'unstarted' && story.story_type == 'bug'
-          list_id = options.bug_list_id
-        elsif story.current_state == 'unstarted' && story.story_type == 'release'
-          list_id = options.release_list_id
-        else
-          puts "Ignoring story #{story.id} - type is '#{story.story_type}', state is '#{story.current_state}'"
-        end
-
-        if story.story_type == 'bug' && options.bug_label
-          label_color = options.bug_label
-        elsif story.story_type == 'feature' && options.feature_label
-          label_color = options.feature_label
-        elsif story.story_type == 'chore' && options.chore_label
-          label_color = options.chore_label
-        elsif story.story_type == 'release' && options.release_label
-          label_color = options.release_label
-        end
-
-        if list_id
-          card = trello.create_card(list_id, story)
-          trello.add_label(card, story.story_type, label_color) unless label_color.nil?
-        end
+        card        = trello.create_card(list_id, story)
+        label_color = get_label_color(story, options)
+        trello.add_label(card, story.story_type, label_color) unless label_color.nil?
       end
     end
 
@@ -62,6 +28,54 @@ module PivotalToTrello
     attr_reader :options
 
     private
+
+    # Returns the Trello list_id to import the given story into, based on the users input.
+    def get_list_id(story, options)
+      list_id = nil
+
+      if story.current_state == 'accepted'
+        list_id = options.accepted_list_id
+      elsif story.current_state == 'rejected'
+        list_id = options.rejected_list_id
+      elsif story.current_state == 'finished'
+        list_id = options.finished_list_id
+      elsif story.current_state == 'delivered'
+        list_id = options.delivered_list_id
+      elsif story.current_state == 'started'
+        list_id = options.current_list_id
+      elsif story.current_state == 'unscheduled'
+        list_id = options.icebox_list_id
+      elsif story.current_state == 'unstarted' && story.story_type == 'feature'
+        list_id = options.feature_list_id
+      elsif story.current_state == 'unstarted' && story.story_type == 'chore'
+        list_id = options.chore_list_id
+      elsif story.current_state == 'unstarted' && story.story_type == 'bug'
+        list_id = options.bug_list_id
+      elsif story.current_state == 'unstarted' && story.story_type == 'release'
+        list_id = options.release_list_id
+      else
+        puts "Ignoring story #{story.id} - type is '#{story.story_type}', state is '#{story.current_state}'"
+      end
+
+      list_id
+    end
+
+    # Returns the Trello label for the given story into, based on the users input.
+    def get_label_color(story, options)
+      label_color = nil
+
+      if story.story_type == 'bug' && options.bug_label
+        label_color = options.bug_label
+      elsif story.story_type == 'feature' && options.feature_label
+        label_color = options.feature_label
+      elsif story.story_type == 'chore' && options.chore_label
+        label_color = options.chore_label
+      elsif story.story_type == 'release' && options.release_label
+        label_color = options.release_label
+      end
+
+      label_color
+    end
 
     # Prompts the user for details about the import/export.
     def prompt_for_details
