@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-MAINTAINER "Kenneth Kalmer" https://github.com/kennethkalmer
+MAINTAINER "Dave Perrett" https://github.com/Dockerfile
 
 # Dependencies
 RUN apt-get -y update &&\

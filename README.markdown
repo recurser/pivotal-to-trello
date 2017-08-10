@@ -12,9 +12,9 @@ Getting started
 
    Or pull the container down using Docker:
 
-        > docker pull kennethkalmer/pivotal-to-trello
+        > docker pull recurser/pivotal-to-trello
 
-   When using the docker container, substitute every occurance of `pivotal-to-tracker` with `sudo docker run -a -i kennethkalmer/pivotal-to-tracker`
+   When using the docker container, substitute every occurance of `pivotal-to-tracker` with `sudo docker run -a -i recurser/pivotal-to-tracker`
 
 2. Run the importer:
 
