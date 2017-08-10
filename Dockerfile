@@ -21,4 +21,4 @@ RUN cd /app && bundle install --without development
 
 # And run
 WORKDIR /app
-ENTRYPOINT ["bundle exec /app/bin/pivotal-to-trello"]
+ENTRYPOINT ["bundle", "exec", "/app/bin/pivotal-to-trello"]
