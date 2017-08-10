@@ -1,4 +1,4 @@
-pivotal-to-trello [![Build Status](https://travis-ci.org/recurser/pivotal-to-trello.png?branch=master)](https://travis-ci.org/recurser/pivotal-to-trello)
+pivotal-to-trello [![Build Status](https://travis-ci.org/recurser/pivotal-to-trello.png?branch=master)](https://travis-ci.org/recurser/pivotal-to-trello) [![Gem Version](https://badge.fury.io/rb/pivotal-to-trello.svg)](https://badge.fury.io/rb/pivotal-to-trello)
 =================
 
 This repo provides a command for exporting a [Pivotal Tracker](https://www.pivotaltracker.com/) project to [Trello](https://trello.com/). The command is available as a gem or a docker container.
