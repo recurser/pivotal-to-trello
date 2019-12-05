@@ -22,7 +22,7 @@ module PivotalToTrello
           list_id: list_id,
         )
 
-        create_notes(card, pivotal_story)
+        create_comments(card, pivotal_story)
         create_tasks(card, pivotal_story)
         card
       end
@@ -92,15 +92,15 @@ module PivotalToTrello
     private
 
     # Copies notes from the pivotal story to the card.
-    def create_notes(card, pivotal_story)
-      pivotal_story.notes.all.each do |note|
-        card.add_comment("[#{note.author}] #{note.text.to_s.strip}") unless note.text.to_s.strip.empty?
+    def create_comments(card, pivotal_story)
+      pivotal_story.comments.each do |comment|
+        card.add_comment("#{comment.text.to_s.strip}") unless comment.text.to_s.strip.empty?
       end
     end
 
     # Copies notes from the pivotal story to the card.
     def create_tasks(card, pivotal_story)
-      tasks = pivotal_story.tasks.all
+      tasks = pivotal_story.tasks
       return if tasks.empty?
 
       checklist = Trello::Checklist.create(name: 'Tasks', card_id: card.id)
