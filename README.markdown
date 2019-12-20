@@ -235,6 +235,7 @@ The Pivotal Tracker token can be found at the bottom of your [Pivotal profile pa
 Change history
 --------------
 
+* **Version 0.3.1 (2019-12-20)** : Added Ron Williams as an author in the gemspec again after `rake release` removed him.
 * **Version 0.3.0 (2019-12-04)** : Update to the maintained tracker_api gem (thanks @rwilliams!).
 * **Version 0.2.0 (2017-08-10)** : Fix label creation, update gem dependencies, add checklist support (thanks @rikthevik!), add docker support (thanks @kennethkalmer!).
 * **Version 0.1.2 (2014-01-13)** : Update version number in the gemspec.

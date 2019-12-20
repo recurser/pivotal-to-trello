@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary     = %(Pivotal Tracker to Trello exporter)
   gem.description = %(Pulls stories from Pivotal Tracker and imports them into Trello)
   gem.email       = 'hello@daveperrett.com'
-  gem.authors     = ['Dave Perrett', 'Erik Frederiksen', 'Kenneth Kalmer']
+  gem.authors     = ['Dave Perrett', 'Erik Frederiksen', 'Kenneth Kalmer', 'Ron Williams']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
