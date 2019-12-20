@@ -1,12 +1,14 @@
 require File.expand_path(File.dirname(File.dirname(__FILE__)) + '/spec_helper')
 
 describe 'PivotalWrapper' do
-  let(:wrapper) { PivotalToTrello::PivotalWrapper.new(PT_USER_1[:token]) }
+  # API Token is for a user with just one public sample project.
+  let(:token)   { 'ab4c5895f57995bb7547986eacf91160' }
+  let(:wrapper) { PivotalToTrello::PivotalWrapper.new(token) }
 
   context '#initialize' do
     it 'sets the pivotal token' do
-      expect(TrackerApi::Client).to receive(:new).with(token: PT_USER_1[:token])
-      PivotalToTrello::PivotalWrapper.new(PT_USER_1[:token])
+      expect(TrackerApi::Client).to receive(:new).with(token: token)
+      PivotalToTrello::PivotalWrapper.new(token)
     end
   end
 

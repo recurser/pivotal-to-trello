@@ -3,9 +3,6 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'pivotal-to-trello'
 
-# These API Tokens are for a user with just one Public Sample Project
-PT_USER_1 = { token: 'ab4c5895f57995bb7547986eacf91160'}
-
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
@@ -35,7 +32,7 @@ def mock_pivotal_story(options = {})
     current_state: 'unstarted',
     story_type:    'feature',
   }.merge(options)
-  
+
   story = double(TrackerApi::Resources::Story)
   allow(story).to receive(:comments).and_return([])
   allow(story).to receive(:tasks).and_return([])
