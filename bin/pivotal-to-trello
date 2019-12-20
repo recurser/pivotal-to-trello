@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 file = __FILE__
 if File.lstat(file).symlink?

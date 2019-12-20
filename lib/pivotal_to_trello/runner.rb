@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'optparse'
 require 'ostruct'
 
@@ -86,7 +88,7 @@ module PivotalToTrello
 
       global.order!
       command = args.shift
-      commands[command].order! if commands[command]
+      commands[command]&.order!
 
       # Output a help message unless a command has been specified.
       STDOUT.write global unless options.action
@@ -104,5 +106,5 @@ module PivotalToTrello
     def show_version
       STDOUT.write "pivotal-to-trello version #{PivotalToTrello.version}"
     end
-  end # class Runner
-end # module PivotalToTrello
+  end
+end

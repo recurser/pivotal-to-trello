@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'trello'
 
 module PivotalToTrello
@@ -48,7 +50,7 @@ module PivotalToTrello
         choices = Trello::Board.find(board_id).lists.each_with_object({}) do |list, hash|
           hash[list.id] = list.name
         end
-        choices        = Hash[choices.sort_by { |_, v| v }]
+        choices = Hash[choices.sort_by { |_, v| v }]
         choices[false] = "[don't import these stories]"
         choices
       end
@@ -94,7 +96,7 @@ module PivotalToTrello
     # Copies notes from the pivotal story to the card.
     def create_comments(card, pivotal_story)
       pivotal_story.comments.each do |comment|
-        card.add_comment("#{comment.text.to_s.strip}") unless comment.text.to_s.strip.empty?
+        card.add_comment(comment.text.to_s.strip.to_s) unless comment.text.to_s.strip.empty?
       end
     end
 

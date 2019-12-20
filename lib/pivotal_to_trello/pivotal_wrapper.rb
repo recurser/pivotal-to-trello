@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'tracker_api'
 
 module PivotalToTrello
@@ -19,13 +21,6 @@ module PivotalToTrello
     def stories(project_id)
       @client.project(project_id).stories.sort_by(&:created_at)
     end
-
-    #i have no idea why the project method is private so i had to add this to get passing tests
-    def get_client
-      @client
-    end
-
-    private
 
     # Returns the Pivotal project that we're exporting.
     def project(project_id)

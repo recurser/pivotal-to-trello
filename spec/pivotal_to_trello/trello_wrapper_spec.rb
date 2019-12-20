@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.dirname(File.dirname(__FILE__)) + '/spec_helper')
 
 describe 'TrelloWrapper' do
@@ -87,8 +89,8 @@ describe 'TrelloWrapper' do
       list  = OpenStruct.new(id: 'id', name: 'My List')
       expect(Trello::Board).to receive(:find).with('board_id').and_return(board)
       expect(board).to receive(:lists).and_return([list])
-      expect(wrapper.list_choices('board_id')).to eq( 'id'  => 'My List',
-                                                      false => "[don't import these stories]")
+      expect(wrapper.list_choices('board_id')).to eq('id'  => 'My List',
+                                                     false => "[don't import these stories]")
     end
   end
 
@@ -132,5 +134,4 @@ describe 'TrelloWrapper' do
       wrapper.add_label(card, 'bug', 'red')
     end
   end
-
 end
