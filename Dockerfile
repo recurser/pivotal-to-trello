@@ -1,16 +1,8 @@
-FROM ubuntu:14.04
+FROM ruby:2.6
 
 MAINTAINER "Dave Perrett" https://github.com/Dockerfile
 
-# Dependencies
-RUN apt-get -y update &&\
-    apt-get install -y software-properties-common &&\
-    apt-add-repository ppa:brightbox/ruby-ng &&\
-    apt-get update -q
-
-RUN apt-get install -y build-essential zlib1g-dev libxml2-dev \
-    ruby2.2 ruby2.2-dev &&\
-    gem install bundler --no-rdoc --no-ri
+RUN gem install bundler
 
 # Prepare
 RUN mkdir /app

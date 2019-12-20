@@ -32,9 +32,10 @@ def mock_pivotal_story(options = {})
     current_state: 'unstarted',
     story_type:    'feature',
   }.merge(options)
-  story = double(PivotalTracker::Story)
-  allow(story).to receive_message_chain(:notes, :all).and_return([])
-  allow(story).to receive_message_chain(:tasks, :all).and_return([])
+
+  story = double(TrackerApi::Resources::Story)
+  allow(story).to receive(:comments).and_return([])
+  allow(story).to receive(:tasks).and_return([])
   options.each { |k, v| allow(story).to receive_messages(k => v) }
   story
 end

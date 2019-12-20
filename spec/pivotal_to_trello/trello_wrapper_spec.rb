@@ -50,12 +50,12 @@ describe 'TrelloWrapper' do
     end
 
     it 'adds comments' do
-      note  = OpenStruct.new(text: 'My Note', author: 'John Smith')
+      note  = OpenStruct.new(text: 'My Note')
       story = mock_pivotal_story
-      allow(story).to receive_message_chain(:notes, :all).and_return([note])
+      allow(story).to receive(:comments).and_return([note])
       expect(wrapper).to receive(:get_card).and_return(nil)
       expect(Trello::Card).to receive(:create).and_return(card)
-      expect(card).to receive(:add_comment).with('[John Smith] My Note')
+      expect(card).to receive(:add_comment).with('My Note')
       expect(wrapper.create_card('list_id', story)).to eq(card)
     end
 
@@ -63,7 +63,7 @@ describe 'TrelloWrapper' do
       task      = OpenStruct.new(description: 'My Task', complete: false)
       story     = mock_pivotal_story
       checklist = double(Trello::Checklist)
-      allow(story).to receive_message_chain(:tasks, :all).and_return([task])
+      allow(story).to receive(:tasks).and_return([task])
       expect(wrapper).to receive(:get_card).and_return(nil)
       expect(Trello::Card).to receive(:create).and_return(card)
       expect(Trello::Checklist).to receive(:create).with(name: 'Tasks', card_id: card.id).and_return(checklist)

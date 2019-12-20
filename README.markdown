@@ -12,9 +12,9 @@ Getting started
 
    Or pull the container down using Docker:
 
-        > docker pull recurser/pivotal-to-trello
+        > docker pull ronawilliams/pivotal-to-trello
 
-   When using the docker container, substitute every occurance of `pivotal-to-tracker` with `sudo docker run -a -i recurser/pivotal-to-tracker`
+   When using the docker container, substitute `pivotal-to-trello` with `docker run -i ronawilliams/pivotal-to-trello`
 
 2. Run the importer:
 
@@ -235,6 +235,7 @@ The Pivotal Tracker token can be found at the bottom of your [Pivotal profile pa
 Change history
 --------------
 
+* **Version 0.3.0 (2019-12-04)** : Update to the maintained tracker_api gem (thanks @rwilliams!).
 * **Version 0.2.0 (2017-08-10)** : Fix label creation, update gem dependencies, add checklist support (thanks @rikthevik!), add docker support (thanks @kennethkalmer!).
 * **Version 0.1.2 (2014-01-13)** : Update version number in the gemspec.
 * **Version 0.1.1 (2014-01-13)** : Specify gem dependencies.
